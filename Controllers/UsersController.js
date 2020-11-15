@@ -24,6 +24,13 @@ const validateEmail = (email) => {
   });
 }
 
+exports.getByEmail = (email) => {
+  return new Promise(async function(resolve, reject) {
+    const user = await User.query("email").eq(email).exec();
+    resolve(user);
+  });
+};
+
 exports.register = async (req, res, next) => {
   const { email, password } = req.body;
 

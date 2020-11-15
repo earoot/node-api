@@ -2,6 +2,13 @@ const Store = require('../Models/StoreModel');
 const helper = require('../helper.js');
 const { v4: uuidv4 } = require('uuid');
 
+exports.getById = (id) => {
+  return new Promise(async function(resolve, reject) {
+    const user = await Store.query("id").eq(id).exec();
+    resolve(user);
+  });
+};
+
 exports.get  = async (req, res, next) => {
   try {
     let stores = await Store.scan().exec();
@@ -31,7 +38,7 @@ exports.store =  async (req, res, next) => {
 exports.remove = async (req, res, next) => {
   const _id = req.params.id;
   const store = await Store.get(_id);
-  if (!store) return helper.responseJson(res, 401, 'This store does not exist', {});
+  if (!store) return helper.responseJson(res, 404, 'This store does not exist', {});
   store.delete((error) => {
       if (error) {
           console.error(error);

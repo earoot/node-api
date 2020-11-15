@@ -22,8 +22,8 @@ app.use(express.json());
 
 app.use('/', routes);
 
-// app.listen(port, () => {
-//   console.log(`listening at http://localhost:${port}`)
-// });
+app.listen(port, () => {
+  console.log(`listening at http://localhost:${port}`)
+});
 
-module.exports.handler = serverless(app);
+// module.exports.handler = serverless(app);
