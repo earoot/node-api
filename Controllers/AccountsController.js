@@ -70,7 +70,9 @@ exports.registerTransaction = async (req, res, next) => {
 
 exports.getAccountInfo = async (req, res, next) => {
   let account = {};
-  const { email, storeId } = req.body;
+
+  const email = req.params.email;
+  const storeId = req.params.store;
 
   const accounts = await Account.scan({
     "email": {"eq": email},

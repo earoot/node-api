@@ -38,7 +38,7 @@ router.use(validateToken).get('/stores/get', storeController.get);
 router.use(validateToken).post('/stores/store', storeController.store);
 router.use(validateToken).delete('/stores/remove/:id', storeController.remove);
 
-router.use(validateToken).get('/accounts/get-info', accountController.getAccountInfo);
+router.use(validateToken).get('/accounts/get-info/:email/:store', accountController.getAccountInfo);
 router.use(validateToken).put('/accounts/register-transaction', accountController.registerTransaction);
 
 module.exports = router;
