@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+    - aws s3 cp s3://environment-docs/serverless.yml serverless.yml
+    - npm install --silent --no-progress -g npm
+    - npm install --silent --no-progress -g serverless
+  pre_build:
+    commands:
+    - npm install --silent --no-progress
+  build:
+    commands:
+    - mkdir -p target/dev
+    - serverless package --package target/dev --stage dev -v -r us-east-2
+
+artifacts:
+  files:
+  - target/dev/*
+  - serverless.yml
+  - deploy.sh
